@@ -18,7 +18,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth')->group(function (){
     //File Routes
-    Route::get('/', [FileController::class, 'index'])->name("homepage");
+    Route::get('/', [FileController::class, 'index'])->name('homepage');
+    Route::get('/my-files', [FileController::class, 'userFiles'])->name('userFiles');
 
     Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 });
