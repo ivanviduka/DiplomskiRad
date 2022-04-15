@@ -91,7 +91,7 @@
                         5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
                 <div>
-                    You don't have any stored files. <a href="#" class="alert-link">Add your
+                    You don't have any stored files. <a href="{{route('create-file.form')}}" class="alert-link">Add your
                         first file </a>.
                 </div>
             </div>

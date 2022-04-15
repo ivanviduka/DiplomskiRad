@@ -30,7 +30,12 @@
                 @endguest
                 @auth
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('userFiles') }}">My files</a>
+                        <a class="nav-link" href="{{ route('user.files') }}">My files</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('create-file.form') }}" method="GET" class="form-horizontal">
+                            <button type="submit" class="btn btn-outline-primary btn-block m-2">Add new file</button>
+                        </form>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>

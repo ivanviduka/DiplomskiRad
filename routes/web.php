@@ -19,8 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth')->group(function (){
     //File Routes
     Route::get('/', [FileController::class, 'index'])->name('homepage');
-    Route::get('/my-files', [FileController::class, 'userFiles'])->name('userFiles');
-
+    Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
+    Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
+    Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
     Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 });
 
