@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\FileAction;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegistrationRequest;
 use App\Models\User;
@@ -43,6 +44,15 @@ class AuthController extends Controller
         ]);
 
         return redirect("login");
+    }
+
+    public function delete(User $user, FileAction $action){
+
+        $action->deleteUserFiles($user, 'user-files');
+
+        User::where('id', $user->id)->delete();
+
+        return redirect()->route('admin');
     }
 
 

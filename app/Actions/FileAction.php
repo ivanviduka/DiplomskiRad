@@ -5,6 +5,7 @@ namespace App\Actions;
 
 use App\Http\Requests\UploadFileRequest;
 use App\Models\File;
+use App\Models\User;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -24,6 +25,16 @@ class FileAction {
 
     public function deleteFile(File $file, string $storagePath){
         Storage::delete($storagePath . "/" . $file->generated_file_name);
+    }
+
+    public function deleteUserFiles(User $user, string $storagePath){
+
+        $files = File::where("user_id", $user->id)->get();
+
+        foreach ($files as $file) {
+            $this->deleteFile($file, $storagePath);
+        }
+
     }
 
 }

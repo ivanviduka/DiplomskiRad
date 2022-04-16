@@ -37,6 +37,17 @@
                             <button type="submit" class="btn btn-outline-primary btn-block m-2">Add new file</button>
                         </form>
                     </li>
+                    @if(auth()->user()->is_admin)
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('admin') }}">Admin</a>
+                        </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('statistics') }}">Statistika</a>
+                        </li>
+                    @endif
+
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>
