@@ -16,19 +16,27 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::middleware('auth')->group(function (){
+Route::middleware('auth')->group(function () {
+
     //File Routes
-    Route::get('/', [FileController::class, 'index'])->name("homepage");
+    Route::get('/', [FileController::class, 'index'])->name('homepage');
+    Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
+    Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
+    Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
+    Route::middleware('checkOwner:')->group(function () {
+        Route::get('update/{file}', [FileController::class, 'updateForm'])->name("update-file.form");
+        Route::post('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
+        Route::delete('file/{file}', [FileController::class, 'deleteFile'])->name("delete.file");
+    });
 
     Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 });
 
 
-Route::middleware('guest')->group(function (){
+Route::middleware('guest')->group(function () {
     // Login Routes
     Route::get('login', [AuthController::class, 'index'])->name('login');
     Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom');
-
 
     //Registration Routes
     Route::get('registration', [AuthController::class, 'registration'])->name('register');

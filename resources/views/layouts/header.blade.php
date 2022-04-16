@@ -13,7 +13,7 @@
 <nav class="navbar navbar-light navbar-expand-lg mb-5" style="background-color: #e3f2fd;">
     <div class="container">
 
-        <h2> FERIT SHARE </h2>
+        <h2><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">FERIT Share</a></h2>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                 aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -29,7 +29,14 @@
                     </li>
                 @endguest
                 @auth
-
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ route('user.files') }}">My files</a>
+                    </li>
+                    <li class="nav-item">
+                        <form action="{{ route('create-file.form') }}" method="GET" class="form-horizontal">
+                            <button type="submit" class="btn btn-outline-primary btn-block m-2">Add new file</button>
+                        </form>
+                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('signout') }}">Logout</a>
                     </li>
