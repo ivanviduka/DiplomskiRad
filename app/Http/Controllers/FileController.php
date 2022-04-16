@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-
 use App\Actions\FileAction;
 use App\Http\Requests\UpdateFileRequest;
 use App\Http\Requests\UploadFileRequest;
@@ -75,8 +74,7 @@ class FileController extends Controller
         return redirect()->route('user.files');
     }
 
-    public function deleteFile(int $fileID, FileAction $action){
-        $file = File::where('id', $fileID)->first();
+    public function deleteFile(File $file, FileAction $action){
 
         $action->deleteFile($file, 'user-files');
 

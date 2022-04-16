@@ -70,7 +70,7 @@
                             </td>
 
                             <td>
-                                <form action="/file/{{ $file->id }}" method="POST">
+                                <form action="{{route('delete.file', [$file])}}" method="POST">
                                     @csrf
                                     {{ method_field('DELETE') }}
 
