@@ -18,12 +18,14 @@
                     <thead>
                     <th scope="col">File</th>
                     <th scope="col">Description</th>
+                    <th scope="col">Subject</th>
                     <th scope="col">Owner</th>
                     <th scope="col"></th>
                     </thead>
 
                     <tbody>
                     @foreach ($files as $file)
+
                         <tr>
                             <td class="table-text">
                                 <a href="#">{{ $file->user_file_name }}</a>
@@ -31,6 +33,10 @@
 
                             <td class="table-text">
                                 <div>{{ $file->description }}</div>
+                            </td>
+
+                            <td class="table-text">
+                                <div>{{ $file->subject->subject_name}}</div>
                             </td>
 
                             <td class="table-text">
@@ -57,7 +63,7 @@
                         5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
                 </svg>
                 <div>
-                    There are no uploaded public files </a>.
+                    There are no uploaded public files</a>.
                 </div>
             </div>
         </div>

@@ -4,6 +4,8 @@ namespace App\Actions;
 
 
 use App\Http\Requests\UploadFileRequest;
+use App\Models\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class FileAction {
@@ -16,8 +18,12 @@ class FileAction {
 
         return [
             'generated_name' => $generatedFileName,
-            'original_name' => $file->getClientOriginalName(),
+            'original_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
             'file_extension' => $file->extension()];
+    }
+
+    public function deleteFile(File $file, string $storagePath){
+        Storage::delete($storagePath . "/" . $file->generated_file_name);
     }
 
 }

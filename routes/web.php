@@ -22,6 +22,10 @@ Route::middleware('auth')->group(function (){
     Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
     Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
     Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
+    Route::get('update/{file}', [FileController::class, 'updateForm'])->name("update-file.form");
+    Route::post('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
+    Route::delete('file/{id}', [FileController::class, 'deleteFile'])->name("delete.file");
+
     Route::get('signout', [AuthController::class, 'signOut'])->name('signout');
 });
 

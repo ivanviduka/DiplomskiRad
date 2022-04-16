@@ -20,7 +20,7 @@ class CreateFilesTable extends Migration
             $table->string("user_file_name");
             $table->boolean("is_public");
             $table->string("file_type");
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger("user_id")->index();
             $table->foreign("user_id")->references("id")->on("users")->onDelete("cascade");
             $table->unsignedBigInteger("subject_id")->index();

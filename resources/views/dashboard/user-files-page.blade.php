@@ -19,6 +19,7 @@
                     <th scope="col">File </th>
                     <th scope="col"></th>
                     <th scope="col">Description</th>
+                    <th scope="col">Subject</th>
                     <th scope="col"></th>
                     <th scope="col"></th>
                     </thead>
@@ -56,8 +57,12 @@
                                 <div>{{ $file->description }}</div>
                             </td>
 
+                            <td class="table-text">
+                                <div>{{ $file->subject->subject_name}}</div>
+                            </td>
+
                             <td>
-                                <form action="/update/{{ $file->id }}" method="GET">
+                                <form action="{{route('update-file.form', [$file])}}" method="GET">
                                     <button class="btn btn-outline-secondary">Alter File</button>
                                 </form>
 
@@ -66,7 +71,7 @@
 
                             <td>
                                 <form action="/file/{{ $file->id }}" method="POST">
-                                    {{ csrf_field() }}
+                                    @csrf
                                     {{ method_field('DELETE') }}
 
                                     <button class="btn btn-outline-danger"

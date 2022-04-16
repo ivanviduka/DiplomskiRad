@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Actions\FileAction;
+use App\Http\Requests\UpdateFileRequest;
 use App\Http\Requests\UploadFileRequest;
 use App\Models\File;
 use App\Models\Subject;
@@ -14,7 +15,7 @@ class FileController extends Controller
     public function index()
     {
         return view('dashboard.homepage', [
-            'files' => File::with('user')->where('is_public', 1)
+            'files' => File::with('user:id,email', 'subject:id,subject_name')->where('is_public', 1)
                 ->orderBy('created_at', 'ASC')->paginate(10)
         ]);
     }
@@ -22,7 +23,7 @@ class FileController extends Controller
     public function userFiles()
     {
         return view('dashboard.user-files-page', [
-            'files' => File::where('user_id', auth()->user()->id)
+            'files' => File::with('subject:id,subject_name')->where('user_id', auth()->user()->id)
                 ->orderBy('created_at', 'ASC')->paginate(10)
         ]);
     }
@@ -49,6 +50,37 @@ class FileController extends Controller
             'subject_id' => $request->subject_id,
             'user_id' => auth()->user()->id,
         ]);
+
+        return redirect()->route('user.files');
+    }
+
+    public function updateForm(File $file){
+
+        return view('dashboard.update-file-page', [
+            'file' => $file,
+            'subjects' => Subject::select('id', 'subject_name')
+                ->orderBy('year_of_study', 'ASC')
+                ->orderBy('subject_name')->get()
+        ]);
+    }
+
+    public function updateFile(UpdateFileRequest $request, File $file){
+
+        File::where('id', $file->id)->update([
+            'user_file_name' => $request->user_file_name,
+            'is_public' => $request->has('is_public'),
+            'description' => $request->description,
+        ]);
+
+        return redirect()->route('user.files');
+    }
+
+    public function deleteFile(int $fileID, FileAction $action){
+        $file = File::where('id', $fileID)->first();
+
+        $action->deleteFile($file, 'user-files');
+
+        File::where('id', $file->id)->delete();
 
         return redirect()->route('user.files');
     }
