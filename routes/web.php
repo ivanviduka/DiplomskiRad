@@ -30,6 +30,8 @@ Route::middleware('auth')->group(function () {
         Route::delete('file/{file}', [FileController::class, 'deleteFile'])->name("delete.file");
     });
     Route::delete('file/{file}', [FileController::class, 'deleteFile'])->middleware('admin-owner')->name("delete.file");
+    Route::get('download/{file:generated_file_name}', [FileController::class, 'downloadFile'])
+        ->middleware('owner-public')->name("file.download");
 
     //Admin Routes
     Route::middleware('admin')->group(function () {

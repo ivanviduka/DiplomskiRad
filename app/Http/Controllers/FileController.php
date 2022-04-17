@@ -27,7 +27,8 @@ class FileController extends Controller
         ]);
     }
 
-    public function createForm() {
+    public function createForm()
+    {
 
         return view('dashboard.create-file-page', [
             'subjects' => Subject::select('id', 'subject_name')
@@ -36,7 +37,8 @@ class FileController extends Controller
         ]);
     }
 
-    public function addFile(UploadFileRequest $request, FileAction $action){
+    public function addFile(UploadFileRequest $request, FileAction $action)
+    {
 
         $fileInfo = $action->saveFile($request, 'user-files');
 
@@ -53,7 +55,8 @@ class FileController extends Controller
         return redirect()->route('user.files');
     }
 
-    public function updateForm(File $file){
+    public function updateForm(File $file)
+    {
 
         return view('dashboard.update-file-page', [
             'file' => $file,
@@ -63,7 +66,8 @@ class FileController extends Controller
         ]);
     }
 
-    public function updateFile(UpdateFileRequest $request, File $file){
+    public function updateFile(UpdateFileRequest $request, File $file)
+    {
 
         File::where('id', $file->id)->update([
             'user_file_name' => $request->user_file_name,
@@ -74,13 +78,23 @@ class FileController extends Controller
         return redirect()->route('user.files');
     }
 
-    public function deleteFile(File $file, FileAction $action){
+    public function deleteFile(File $file, FileAction $action)
+    {
 
         $action->deleteFile($file, 'user-files');
 
         File::where('id', $file->id)->delete();
 
         return redirect()->back();
+    }
+
+    public function downloadFile(File $file)
+    {
+
+        $download_link = storage_path('app/user-files/' . $file->generated_file_name);
+        if (file_exists($download_link)) {
+            return response()->download($download_link);
+        }
     }
 
 }
