@@ -27,8 +27,8 @@
                     @foreach ($files as $file)
 
                         <tr>
-                            <td class="table-text">
-                                <a href="#">{{ $file->user_file_name }}</a>
+                            <td class="table-text" style="display: flex; align-items: center;">
+                                <a href="#">{{ $file->user_file_name . "." . $file->file_type }}</a>
 
                                 @if(auth()->user()->is_admin)
                                     <form action="{{route('delete.file', [$file])}}" method="POST">
@@ -51,6 +51,7 @@
                                         </button>
                                     </form>
                                 @endif
+
                             </td>
 
                             <td class="table-text">

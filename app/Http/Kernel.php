@@ -3,6 +3,7 @@
 namespace App\Http;
 
 use App\Http\Middleware\CheckAdmin;
+use App\Http\Middleware\CheckAdminOrOwner;
 use App\Http\Middleware\CheckOwner;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
@@ -67,5 +68,6 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'checkOwner' => CheckOwner::class,
         'admin' => CheckAdmin::class,
+        'admin-owner' => CheckAdminOrOwner::class,
     ];
 }
