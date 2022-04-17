@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckAdminOrOwner
+class CheckOwnerOrPublic
 {
     /**
      * Handle an incoming request.
@@ -18,7 +18,7 @@ class CheckAdminOrOwner
     {
         $file = $request->route()->parameters()['file'];
 
-        if (($file->user_id != auth()->user()->id) && !auth()->user()->is_admin){
+        if (($file->user_id != auth()->user()->id) && !$file->is_public){
             abort(403, 'Forbidden access');
         }
         return $next($request);

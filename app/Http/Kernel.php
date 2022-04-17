@@ -5,6 +5,7 @@ namespace App\Http;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckAdminOrOwner;
 use App\Http\Middleware\CheckOwner;
+use App\Http\Middleware\CheckOwnerOrPublic;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -69,5 +70,6 @@ class Kernel extends HttpKernel
         'checkOwner' => CheckOwner::class,
         'admin' => CheckAdmin::class,
         'admin-owner' => CheckAdminOrOwner::class,
+        'owner-public' => CheckOwnerOrPublic::class,
     ];
 }

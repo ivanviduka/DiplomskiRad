@@ -28,7 +28,7 @@
 
                         <tr>
                             <td class="table-text" style="display: flex; align-items: center;">
-                                <a href="#">{{ $file->user_file_name . "." . $file->file_type }}</a>
+                                <a href="{{ route('file.download', [$file]) }}">{{ $file->user_file_name . "." . $file->file_type }}</a>
 
                                 @if(auth()->user()->is_admin)
                                     <form action="{{route('delete.file', [$file])}}" method="POST">

@@ -28,7 +28,7 @@
                     @foreach ($files as $file)
                         <tr>
                             <td class="table-text">
-                                <a href="#">{{ $file->user_file_name . "." . $file->file_type }} </a>
+                                <a href="{{ route('file.download', [$file]) }}">{{ $file->user_file_name . "." . $file->file_type }} </a>
                             </td>
 
                             @if($file->is_public)
