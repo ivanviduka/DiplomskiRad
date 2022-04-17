@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Actions\DatabaseAction;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -20,8 +21,10 @@ class AdminController extends Controller
 
     }
 
-    public function statistics(){
-
+    public function statistics(DatabaseAction $action){
+        return view('admin.statistics', [
+            'statistics' => $action->adminStatistics()
+        ]);
     }
 
     public function changeRole(User $user, Request $request)
