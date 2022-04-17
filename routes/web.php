@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\FileController;
 use Illuminate\Support\Facades\Route;
@@ -23,10 +24,19 @@ Route::middleware('auth')->group(function () {
     Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
     Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
     Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
-    Route::middleware('checkOwner:')->group(function () {
+    Route::middleware('checkOwner')->group(function () {
         Route::get('update/{file}', [FileController::class, 'updateForm'])->name("update-file.form");
         Route::post('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
         Route::delete('file/{file}', [FileController::class, 'deleteFile'])->name("delete.file");
+    });
+    Route::delete('file/{file}', [FileController::class, 'deleteFile'])->middleware('admin-owner')->name("delete.file");
+
+    //Admin Routes
+    Route::middleware('admin')->group(function () {
+        Route::get('admin', [AdminController::class, 'index'])->name('admin');
+        Route::get('/statistics', [AdminController::class, 'statistics'])->name('statistics');
+        Route::post('/update-user/{user}', [AdminController::class, 'changeRole'])->name('update.role');
+        Route::delete('delete-user/{user}', [AuthController::class, 'delete'])->name("delete.user");
     });
 
     Route::get('signout', [AuthController::class, 'signOut'])->name('signout');

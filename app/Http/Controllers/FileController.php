@@ -80,7 +80,7 @@ class FileController extends Controller
 
         File::where('id', $file->id)->delete();
 
-        return redirect()->route('user.files');
+        return redirect()->back();
     }
 
 }
