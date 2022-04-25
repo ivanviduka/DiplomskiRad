@@ -120,7 +120,7 @@
                                 <div>{{ $file->user->email }}</div>
                             </td>
 
-                            <td>More info</td>
+                            <td><a class="d-block text-center mt-2" href="{{route('file.details', [$file])}}"> More info </a></td>
 
                         </tr>
                     @endforeach

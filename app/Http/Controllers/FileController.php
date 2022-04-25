@@ -35,11 +35,21 @@ class FileController extends Controller
 
     public function createForm()
     {
-
         return view('dashboard.create-file-page', [
             'subjects' => Subject::select('id', 'subject_name')
                 ->orderBy('year_of_study', 'ASC')
                 ->orderBy('subject_name')->get()
+        ]);
+    }
+
+    public function showDetails(File $file){
+
+        $details = File::with('user:id,first_name,last_name,email', 'subject:id,subject_name,major_name,year_of_study')
+            ->where('id', $file->id)
+            ->first();
+
+        return view('dashboard.details', [
+            'details' => $details
         ]);
     }
 

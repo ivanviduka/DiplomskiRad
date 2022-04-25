@@ -24,6 +24,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/like-post/{file}',[FileController::class,'likeFile'])->name('like.file');
     Route::post('/unlike-post/{file}',[FileController::class,'unlikeFile'])->name('unlike.file');
     Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
+    Route::get('/details/{file}', [FileController::class, 'showDetails'])->name('file.details');
     Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
     Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
     Route::middleware('owner')->group(function () {
