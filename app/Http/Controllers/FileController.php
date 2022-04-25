@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Actions\FileAction;
 use App\Http\Requests\UpdateFileRequest;
 use App\Http\Requests\UploadFileRequest;
+use App\Models\Comment;
 use App\Models\File;
 use App\Models\Subject;
 
@@ -42,14 +43,29 @@ class FileController extends Controller
         ]);
     }
 
-    public function showDetails(File $file){
+    public function showDetails(int $file_id){
 
         $details = File::with('user:id,first_name,last_name,email', 'subject:id,subject_name,major_name,year_of_study')
-            ->where('id', $file->id)
+            ->where('id', $file_id)
             ->first();
 
+        if(isset($details)){
+            if(!$details->is_public){
+                abort(403, "This file is private");
+            }
+        }
+
+        else {
+            abort(404);
+        }
+
+        $comments = Comment::with('user:id,first_name,last_name')
+            ->where('file_id', $file_id)
+            ->get();
+
         return view('dashboard.details', [
-            'details' => $details
+            'details' => $details,
+            'comments' => $comments
         ]);
     }
 

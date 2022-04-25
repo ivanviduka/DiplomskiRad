@@ -16,9 +16,11 @@ class CheckAdminOrOwner
      */
     public function handle(Request $request, Closure $next)
     {
-        $file = $request->route()->parameters()['file'];
+        $parameter = isset($request->route()->parameters()['file']) ?
+            $request->route()->parameters()['file'] :
+            $request->route()->parameters()['comment'];
 
-        if (($file->user_id != auth()->user()->id) && !auth()->user()->is_admin){
+        if (($parameter->user_id != auth()->user()->id) && !auth()->user()->is_admin){
             abort(403, 'Forbidden access');
         }
         return $next($request);
