@@ -21,15 +21,18 @@ Route::middleware('auth')->group(function () {
 
     //File Routes
     Route::get('/', [FileController::class, 'index'])->name('homepage');
+    Route::post('/like-post/{file}',[FileController::class,'likeFile'])->name('like.file');
+    Route::post('/unlike-post/{file}',[FileController::class,'unlikeFile'])->name('unlike.file');
     Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
     Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
     Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
-    Route::middleware('checkOwner')->group(function () {
+    Route::middleware('owner')->group(function () {
         Route::get('update/{file}', [FileController::class, 'updateForm'])->name("update-file.form");
         Route::post('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
         Route::delete('file/{file}', [FileController::class, 'deleteFile'])->name("delete.file");
     });
-    Route::delete('file/{file}', [FileController::class, 'deleteFile'])->middleware('admin-owner')->name("delete.file");
+    Route::delete('file/{file}', [FileController::class, 'deleteFile'])
+        ->middleware('admin-owner')->name("delete.file");
     Route::get('download/{file:generated_file_name}', [FileController::class, 'downloadFile'])
         ->middleware('owner-public')->name("file.download");
 

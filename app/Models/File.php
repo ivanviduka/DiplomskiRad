@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Conner\Likeable\Likeable;
 
 class File extends Model
 {
-    use HasFactory;
+    use HasFactory, Likeable;
 
     protected $fillable = [
         'generated_file_name',
@@ -26,5 +27,14 @@ class File extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+
+    public function checkLike(array $likes){
+        foreach ($likes as $like){
+            if ($like->user_id == auth()->user()->id){
+                return true;
+            }
+        }
+        return false;
     }
 }
