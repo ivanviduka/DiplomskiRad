@@ -13,9 +13,15 @@ class FileController extends Controller
 {
     public function index()
     {
+        $files = File::with('user:id,email', 'subject:id,subject_name', 'likeCounter', 'likes')
+            ->leftJoin('likeable_like_counters', 'files.id', '=', 'likeable_like_counters.likeable_id')
+            ->select('files.*')
+            ->where('is_public', 1)
+            ->orderBy('likeable_like_counters.count', 'DESC')
+            ->orderBy('files.user_file_name', 'ASC')->paginate(10);
+
         return view('dashboard.homepage', [
-            'files' => File::with('user:id,email', 'subject:id,subject_name')->where('is_public', 1)
-                ->orderBy('created_at', 'ASC')->paginate(10)
+            'files' => $files
         ]);
     }
 
@@ -90,11 +96,24 @@ class FileController extends Controller
 
     public function downloadFile(File $file)
     {
-
         $download_link = storage_path('app/user-files/' . $file->generated_file_name);
         if (file_exists($download_link)) {
             return response()->download($download_link);
         }
+    }
+
+    public function likeFile(File $file){
+        $file->like();
+        $file->save();
+
+        return redirect()->back();
+    }
+
+    public function unlikeFile(File $file){
+        $file->unlike();
+        $file->save();
+
+        return redirect()->back();
     }
 
 }
