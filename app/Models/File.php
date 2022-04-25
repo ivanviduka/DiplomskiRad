@@ -29,6 +29,10 @@ class File extends Model
         return $this->belongsTo(Subject::class);
     }
 
+    public function comments(){
+        return $this->hasMany(Comment::class);
+    }
+
     public function checkLike(array $likes){
         foreach ($likes as $like){
             if ($like->user_id == auth()->user()->id){

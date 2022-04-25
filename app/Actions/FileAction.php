@@ -25,8 +25,8 @@ class FileAction {
     }
 
     public function deleteFile(File $file, string $storagePath){
-        Storage::delete($storagePath . "/" . $file->generated_file_name);
 
+        Storage::delete($storagePath . "/" . $file->generated_file_name);
         DB::table('likeable_likes')->where('likeable_id', $file->id)->delete();
         DB::table('likeable_like_counters')->where('likeable_id', $file->id)->delete();
     }
@@ -34,7 +34,6 @@ class FileAction {
     public function deleteUserFiles(User $user, string $storagePath){
 
         $files = File::where("user_id", $user->id)->get();
-
         foreach ($files as $file) {
             $this->deleteFile($file, $storagePath);
         }

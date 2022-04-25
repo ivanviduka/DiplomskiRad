@@ -57,7 +57,7 @@
                                 @if( $file->checkLike($file->likes->where('likeable_id', $file->id)->all()) )
                                     <form action="{{ route('unlike.file', [$file])}}" method="POST">
                                         @csrf
-                                        <button class="btn btn-outline-primary">
+                                        <button class="btn btn-outline-primary btn-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                                  class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
                                                 <path d="M8.864 15.674c-.956.24-1.843-.484-1.908-1.42-.072-1.05-.23-2.015-.428-2.59-.125-.36-.479-1.012-1.04-1.638-.557-.624-1.282-1.179-2.131-1.41C2.685
@@ -80,7 +80,7 @@
                                 @else
                                     <form action="{{ route('like.file', [$file]) }}" method="POST">
                                         @csrf
-                                        <button class="btn btn-outline-primary">
+                                        <button class="btn btn-outline-primary btn-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
                                                  class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
                                                 <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23
@@ -120,7 +120,7 @@
                                 <div>{{ $file->user->email }}</div>
                             </td>
 
-                            <td>More info</td>
+                            <td><a class="d-block text-center mt-2" href="{{route('file.details', [$file->id])}}"> More info </a></td>
 
                         </tr>
                     @endforeach
