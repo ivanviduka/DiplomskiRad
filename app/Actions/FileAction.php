@@ -24,6 +24,22 @@ class FileAction {
             'file_extension' => $file->extension()];
     }
 
+    public function getFileDetails(int $file_id){
+        $details = File::with('user:id,first_name,last_name,email', 'subject:id,subject_name,major_name,year_of_study')
+            ->where('id', $file_id)
+            ->first();
+
+        if (isset($details)) {
+            if (!$details->is_public) {
+                abort(403, "This file is private");
+            }
+        } else {
+            abort(404);
+        }
+
+        return $details;
+    }
+
     public function deleteFile(File $file, string $storagePath){
 
         Storage::delete($storagePath . "/" . $file->generated_file_name);
