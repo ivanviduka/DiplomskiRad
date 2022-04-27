@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,6 +44,10 @@ Route::middleware('auth')->group(function () {
     Route::post('add-comment', [CommentController::class, 'createComment'])->name("add.comment");
     Route::delete('comment/{comment}', [CommentController::class, 'deleteComment'])
         ->middleware('admin-owner')->name("delete.comment");
+
+    //Search Routes
+    Route::get('/search', [SearchController::class, 'index'])->name('search');
+    Route::get('/search-results', [SearchController::class, 'search'])->name('search.results');
 
     //Admin Routes
     Route::middleware('admin')->group(function () {

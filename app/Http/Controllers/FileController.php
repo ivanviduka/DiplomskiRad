@@ -61,9 +61,8 @@ class FileController extends Controller
 
     public function showDetails(int $file_id, FileAction $action)
     {
-
         $details = $action->getFileDetails($file_id);
-        
+
         $comments = Comment::with('user:id,first_name,last_name')
             ->where('file_id', $file_id)
             ->get();
@@ -76,7 +75,6 @@ class FileController extends Controller
 
     public function addFile(UploadFileRequest $request, FileAction $action)
     {
-
         $fileInfo = $action->saveFile($request, 'user-files');
 
         File::create([
@@ -94,18 +92,18 @@ class FileController extends Controller
 
     public function updateForm(File $file)
     {
+        $subjects = Subject::select('id', 'subject_name')
+            ->orderBy('year_of_study', 'ASC')
+            ->orderBy('subject_name')->get();
 
         return view('dashboard.update-file-page', [
             'file' => $file,
-            'subjects' => Subject::select('id', 'subject_name')
-                ->orderBy('year_of_study', 'ASC')
-                ->orderBy('subject_name')->get()
+            'subjects' => $subjects
         ]);
     }
 
     public function updateFile(UpdateFileRequest $request, File $file)
     {
-
         File::where('id', $file->id)->update([
             'user_file_name' => $request->user_file_name,
             'is_public' => $request->has('is_public'),
@@ -117,10 +115,9 @@ class FileController extends Controller
 
     public function deleteFile(File $file, FileAction $action)
     {
-
         $action->deleteFile($file, 'user-files');
 
-        File::where('id', $file->id)->delete();
+        $file->delete();
 
         return redirect()->back();
     }

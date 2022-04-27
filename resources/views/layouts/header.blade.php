@@ -32,10 +32,11 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ route('user.files') }}">My files</a>
                     </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ route('search') }}">Search</a>
+                        </li>
                     <li class="nav-item">
-                        <form action="{{ route('create-file.form') }}" method="GET" class="form-horizontal">
-                            <button type="submit" class="btn btn-outline-primary btn-block m-2">Add new file</button>
-                        </form>
+                            <a class="nav-link" href="{{ route('create-file.form') }}">Add new file</a>
                     </li>
                     @if(auth()->user()->is_admin)
 
