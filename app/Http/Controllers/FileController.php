@@ -10,6 +10,7 @@ use App\Models\File;
 use App\Models\Subject;
 
 
+
 class FileController extends Controller
 {
     public function index()
@@ -19,10 +20,25 @@ class FileController extends Controller
             ->select('files.*')
             ->where('is_public', 1)
             ->orderBy('likeable_like_counters.count', 'DESC')
-            ->orderBy('files.user_file_name', 'ASC')->paginate(10);
+            ->orderBy('files.user_file_name', 'ASC');
+
 
         return view('dashboard.homepage', [
-            'files' => $files
+            'files' => $files->paginate(10)
+        ]);
+    }
+
+    public function indexLatest()
+    {
+        $files = File::with('user:id,email', 'subject:id,subject_name', 'likeCounter', 'likes')
+            ->leftJoin('likeable_like_counters', 'files.id', '=', 'likeable_like_counters.likeable_id')
+            ->select('files.*')
+            ->where('is_public', 1)
+            ->orderBy('created_at', 'DESC')
+            ->orderBy('files.user_file_name', 'ASC');
+
+        return view('dashboard.homepage', [
+            'files' => $files->paginate(10)
         ]);
     }
 
@@ -43,22 +59,11 @@ class FileController extends Controller
         ]);
     }
 
-    public function showDetails(int $file_id){
+    public function showDetails(int $file_id, FileAction $action)
+    {
 
-        $details = File::with('user:id,first_name,last_name,email', 'subject:id,subject_name,major_name,year_of_study')
-            ->where('id', $file_id)
-            ->first();
-
-        if(isset($details)){
-            if(!$details->is_public){
-                abort(403, "This file is private");
-            }
-        }
-
-        else {
-            abort(404);
-        }
-
+        $details = $action->getFileDetails($file_id);
+        
         $comments = Comment::with('user:id,first_name,last_name')
             ->where('file_id', $file_id)
             ->get();
@@ -128,14 +133,16 @@ class FileController extends Controller
         }
     }
 
-    public function likeFile(File $file){
+    public function likeFile(File $file)
+    {
         $file->like();
         $file->save();
 
         return redirect()->back();
     }
 
-    public function unlikeFile(File $file){
+    public function unlikeFile(File $file)
+    {
         $file->unlike();
         $file->save();
 

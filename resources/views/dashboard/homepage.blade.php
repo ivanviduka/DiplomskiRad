@@ -11,6 +11,10 @@
 @section('content')
 
     @if (count($files) > 0)
+        <div style="align-items: center; display: flex">
+            <span><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">Best</a></span>
+            <span><a class="nav-link" href="{{ route('homepage.latest') }}" style="font-size: 20px">Latest</a></span>
+        </div>
         <div class="panel panel-default">
             <div class="panel-body">
                 <table class="table table-hover">
