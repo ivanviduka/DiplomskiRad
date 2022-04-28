@@ -10,14 +10,6 @@
 
 @section('content')
 
-    @if($errors->any())
-        @foreach($errors->all() as $error)
-            <div class="alert alert-danger ms-3 me-3" role="alert">
-                {{ $error}}
-            </div>
-        @endforeach
-    @endif
-
     <div class="container mb-5 mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-sm-6 col-xs-12">
