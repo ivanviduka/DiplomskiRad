@@ -59,12 +59,12 @@ class FileController extends Controller
         ]);
     }
 
-    public function showDetails(int $file_id, FileAction $action)
+    public function showDetails(File $file, FileAction $action)
     {
-        $details = $action->getFileDetails($file_id);
+        $details = $action->getFileDetails($file->id);
 
         $comments = Comment::with('user:id,first_name,last_name')
-            ->where('file_id', $file_id)
+            ->where('file_id', $file->id)
             ->get();
 
         return view('dashboard.details', [
@@ -108,6 +108,7 @@ class FileController extends Controller
             'user_file_name' => $request->user_file_name,
             'is_public' => $request->has('is_public'),
             'description' => $request->description,
+            'subject_id' => $request->subject_id
         ]);
 
         return redirect()->route('user.files');
@@ -124,7 +125,8 @@ class FileController extends Controller
 
     public function downloadFile(File $file)
     {
-        $download_link = storage_path('app/user-files/' . $file->generated_file_name);
+        $download_link = storage_path('app/user-files/' . basename($file->generated_file_name));
+
         if (file_exists($download_link)) {
             return response()->download($download_link);
         }

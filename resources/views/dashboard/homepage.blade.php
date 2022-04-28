@@ -124,7 +124,7 @@
                                 <div>{{ $file->user->email }}</div>
                             </td>
 
-                            <td><a class="d-block text-center mt-2" href="{{route('file.details', [$file->id])}}"> More info </a></td>
+                            <td><a class="d-block text-center mt-2" href="{{route('file.details', [$file])}}"> More info </a></td>
 
                         </tr>
                     @endforeach

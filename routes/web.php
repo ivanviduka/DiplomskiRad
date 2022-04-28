@@ -27,13 +27,12 @@ Route::middleware('auth')->group(function () {
     Route::post('/like-post/{file}',[FileController::class,'likeFile'])->name('like.file');
     Route::post('/unlike-post/{file}',[FileController::class,'unlikeFile'])->name('unlike.file');
     Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
-    Route::get('/details/{id}', [FileController::class, 'showDetails'])->name('file.details');
+    Route::get('/details/{file:generated_file_name}', [FileController::class, 'showDetails'])->name('file.details');
     Route::get('new-file', [FileController::class, 'createForm'])->name("create-file.form");
     Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
     Route::middleware('owner')->group(function () {
-        Route::get('update/{file}', [FileController::class, 'updateForm'])->name("update-file.form");
+        Route::get('update/{file:generated_file_name}', [FileController::class, 'updateForm'])->name("update-file.form");
         Route::post('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
-        Route::delete('file/{file}', [FileController::class, 'deleteFile'])->name("delete.file");
     });
     Route::delete('file/{file}', [FileController::class, 'deleteFile'])
         ->middleware('admin-owner')->name("delete.file");
@@ -63,7 +62,7 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('guest')->group(function () {
     // Login Routes
-    Route::get('login', [AuthController::class, 'index'])->name('login');
+    Route::get('login', [AuthController::class, 'index'])->name('login')->middleware("throttle:8,2");
     Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom');
 
     //Registration Routes

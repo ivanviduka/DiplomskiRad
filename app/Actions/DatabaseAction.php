@@ -44,14 +44,23 @@ class DatabaseAction
         }
 
         if (isset($request->subject_id)) {
+            $request->validate([
+                'subject_id' => 'exists:subjects,id'
+            ]);
             $query->where('subject_id', $request->subject_id);
         }
 
         if (isset($request->year_of_study)) {
+            $request->validate([
+                'year_of_study' => 'numeric|in:1,2,3,4,5'
+            ]);
             $query->where('year_of_study', $request->year_of_study);
         }
 
         if (isset($request->major_id)) {
+            $request->validate([
+                'major_id' => 'exists:subjects,major_id'
+            ]);
             $query->where('major_id', $request->major_id);
         }
 
