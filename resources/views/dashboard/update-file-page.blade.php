@@ -18,6 +18,7 @@
                         <form action="{{ route('update.file', [$file]) }}" method="post" enctype="multipart/form-data">
                             <h3 class="text-center mb-5">Update file</h3>
                             @csrf
+                            @method('PUT')
 
                             @if(session()->has('message'))
                                 <div class="alert alert-danger ms-3 me-3" role="alert">
@@ -59,7 +60,7 @@
 
                             <select style="width:auto;" class="form-select me-4 mb-2" name="subject_id" aria-label="Subject selection">
 
-                                <option value="#" > Odaberi porodicu </option>
+                                <option value="#" >Choose subject</option>
                                 @foreach($subjects as $subject)
                                     <option
                                         value={{$subject->id}} {{$file->subject_id == $subject->id ? "selected" : ""}}>

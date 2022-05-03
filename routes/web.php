@@ -32,7 +32,7 @@ Route::middleware('auth')->group(function () {
     Route::post('add-file', [FileController::class, 'addFile'])->name("add.file");
     Route::middleware('owner')->group(function () {
         Route::get('update/{file:generated_file_name}', [FileController::class, 'updateForm'])->name("update-file.form");
-        Route::post('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
+        Route::put('update/{file}', [FileController::class, 'updateFile'])->name("update.file");
     });
     Route::delete('file/{file:generated_file_name}', [FileController::class, 'deleteFile'])
         ->middleware('admin-owner')->name("delete.file");
@@ -52,7 +52,7 @@ Route::middleware('auth')->group(function () {
     Route::middleware('admin')->group(function () {
         Route::get('admin', [AdminController::class, 'index'])->name('admin');
         Route::get('/statistics', [AdminController::class, 'statistics'])->name('statistics');
-        Route::post('/update-user/{user}', [AdminController::class, 'changeRole'])->name('update.role');
+        Route::put('/update-user/{user}', [AdminController::class, 'changeRole'])->name('update.role');
         Route::delete('delete-user/{user}', [AuthController::class, 'delete'])->name("delete.user");
     });
 
