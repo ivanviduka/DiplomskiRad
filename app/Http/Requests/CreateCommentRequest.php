@@ -24,7 +24,7 @@ class CreateCommentRequest extends FormRequest
     public function rules()
     {
         return [
-            'comment' => 'max:1000',
+            'comment' => 'required|max:1000',
             'file_id' => 'required|not_in:0|exists:files,id',
         ];
     }
