@@ -56,6 +56,7 @@
 
                                     <form class="d-flex" action="{{route('update.role', [$user])}}" method="POST">
                                         @csrf
+                                        @method('PUT')
                                         <select style="width:auto;" class="form-select me-4"
                                                 name="role_id" aria-label="Role selection">
                                             <option value="#" selected>Change Role</option>
