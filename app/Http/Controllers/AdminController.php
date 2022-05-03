@@ -21,7 +21,8 @@ class AdminController extends Controller
 
     }
 
-    public function statistics(DatabaseAction $action){
+    public function statistics(DatabaseAction $action)
+    {
         return view('admin.statistics', [
             'statistics' => $action->adminStatistics()
         ]);
@@ -33,7 +34,7 @@ class AdminController extends Controller
             'role_id' => 'required|in:0,1',
         ]);
 
-        User::where('id', $user->id)->update([
+        $user->update([
             'is_admin' => $request->role_id
         ]);
 

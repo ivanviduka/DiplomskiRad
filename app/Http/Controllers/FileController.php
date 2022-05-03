@@ -10,7 +10,6 @@ use App\Models\File;
 use App\Models\Subject;
 
 
-
 class FileController extends Controller
 {
     public function index()
@@ -104,7 +103,7 @@ class FileController extends Controller
 
     public function updateFile(UpdateFileRequest $request, File $file)
     {
-        File::where('id', $file->id)->update([
+        $file->update([
             'user_file_name' => $request->user_file_name,
             'is_public' => $request->has('is_public'),
             'description' => $request->description,

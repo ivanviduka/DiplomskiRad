@@ -7,7 +7,6 @@ use App\Models\Comment;
 
 class CommentController extends Controller
 {
-
     public function createComment(CreateCommentRequest $request)
     {
         Comment::create([
@@ -21,7 +20,7 @@ class CommentController extends Controller
 
     public function deleteComment(Comment $comment)
     {
-        Comment::where('id', $comment->id)->delete();
+        $comment->delete();
         return redirect()->back();
     }
 }

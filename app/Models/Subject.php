@@ -14,9 +14,10 @@ class Subject extends Model
         'major_id',
         'major_name',
         'year_of_study',
-        ];
+    ];
 
-    public function files() {
+    public function files()
+    {
         return $this->hasMany(File::class);
     }
 }
