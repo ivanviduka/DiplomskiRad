@@ -62,8 +62,8 @@ Route::middleware('auth')->group(function () {
 
 Route::middleware('guest')->group(function () {
     // Login Routes
-    Route::get('login', [AuthController::class, 'index'])->name('login')->middleware("throttle:8,2");
-    Route::post('custom-login', [AuthController::class, 'customLogin'])->name('login.custom');
+    Route::get('login', [AuthController::class, 'index'])->name('login');
+    Route::post('custom-login', [AuthController::class, 'customLogin'])->middleware("throttle:8,2")->name('login.custom');
 
     //Registration Routes
     Route::get('registration', [AuthController::class, 'registration'])->name('register');
