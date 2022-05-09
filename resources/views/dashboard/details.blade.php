@@ -61,10 +61,10 @@
                                 <div class="card-text" style="display: flex; align-items: center;">
                                     <strong> {{$comment->user->first_name}} {{$comment->user->last_name}}</strong>
                                     @if(auth()->user()->is_admin || $comment->user_id == auth()->user()->id)
-                                        <form action="{{route('delete.comment', [$comment])}}" method="POST">
+                                        <form action="{{route('delete.comment', [$comment])}}"  method="POST">
                                             @csrf
                                             {{ method_field('DELETE') }}
-                                            <button class="btn btn-default btn-sm"
+                                            <button class="btn btn-default btn-sm" aria-label="delete file"
                                                     onclick="return confirm('Are you sure you want to delete this file?')">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                      fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -96,13 +96,13 @@
             <div class="card mb-3 col-md-6" style="border: none">
                 <div class="col-md-12">
                     <div class="card-body">
-                        <h5>Leave a comment</h5>
+                        <label for="commentText" class="form-label"> <h5>Leave a comment</h5> </label>
                         <form method="POST" action={{route('add.comment')}}>
                             @csrf
                             <div class="form-group">
                                 <div class="mb-3">
-                                     <textarea type="text" name="comment" rows=3 cols=2 class="form-control"
-                                               id="fileDescription">{{old('comment')}}</textarea>
+                                     <textarea type="text" id="commentText" name="comment" rows=3 cols=2 class="form-control"
+                                               id="commentText">{{old('comment')}}</textarea>
                                 </div>
                                 <input type="hidden" name="file_id" value="{{ $details->id }}"/>
                             </div>

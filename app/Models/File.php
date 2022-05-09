@@ -16,6 +16,7 @@ class File extends Model
         'description',
         'is_public',
         'file_type',
+        'file_size',
         'user_id',
         'subject_id'];
 

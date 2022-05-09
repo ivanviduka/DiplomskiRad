@@ -6,6 +6,7 @@
 
 @section('description')
     <meta name="description" content="Page with form for updating user file">
+
 @endsection
 
 @section('content')
@@ -13,10 +14,10 @@
     <div class="container mb-5 mt-5">
         <div class="row justify-content-center">
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <div class="card border-2 border-primary">
+                <div class="card border-2 border-dark">
                     <div class="card-body">
-                        <form action="{{ route('update.file', [$file]) }}" method="post" enctype="multipart/form-data">
-                            <h3 class="text-center mb-5">Update file</h3>
+                        <form class="form" action="{{ route('update.file', [$file]) }}" method="post" enctype="multipart/form-data">
+                            <h2 class="text-center mb-5">Update file</h2>
                             @csrf
                             @method('PUT')
 
@@ -27,7 +28,7 @@
                             @endif
 
                             <div class="mb-3">
-                                <label for="fileName" class="form-label">File Name</label>
+                                <label for="fileName" class="form-label"><strong>File Name</strong></label>
                                 <input type="text" name="user_file_name" value="{{$file->user_file_name}}" class="form-control"
                                        id="fileName">
                             </div>
@@ -39,7 +40,7 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="selectedFile" class="form-label">File description</label>
+                                <label for="fileDescription" class="form-label"><strong>File description</strong></label>
                                 <textarea type="text" name="description" rows=3 cols=2 class="form-control"
                                           id="fileDescription">{{$file->description}}</textarea>
                             </div>
@@ -77,7 +78,7 @@
                             </div>
 
 
-                            <button type="submit" name="submit" class="btn btn-primary btn-block mt-4">
+                            <button type="submit" name="submit" class="btn btn-success btn-block mt-4">
                                 Update File
                             </button>
 

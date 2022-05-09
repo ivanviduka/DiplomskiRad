@@ -21,7 +21,9 @@ class FileAction {
         return [
             'generated_name' => $generatedFileName,
             'original_name' => pathinfo($file->getClientOriginalName(), PATHINFO_FILENAME),
-            'file_extension' => $file->extension()];
+            'file_extension' => $file->extension(),
+            'file_size' => $file->getSize(),
+        ];
     }
 
     public function getFileDetails(int $file_id){

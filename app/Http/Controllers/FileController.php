@@ -81,6 +81,7 @@ class FileController extends Controller
             'user_file_name' => $fileInfo['original_name'],
             'is_public' => $request->has('is_public'),
             'file_type' => $fileInfo['file_extension'],
+            'file_size' => $fileInfo['file_size'],
             'description' => $request->description,
             'subject_id' => $request->subject_id,
             'user_id' => auth()->user()->id,

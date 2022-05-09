@@ -6,41 +6,58 @@
 
 @section('description')
     <meta name="description" content="Homepage with shared public files">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/table_style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/button_style.css') }}" />
 @endsection
 
 @section('content')
 
     @if (count($files) > 0)
-        <div style="align-items: center; display: flex">
-            <span><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">Best</a></span>
-            <span><a class="nav-link" href="{{ route('homepage.latest') }}" style="font-size: 20px">Latest</a></span>
-        </div>
-        <div class="panel panel-default">
+
+        <div class="container-fluid w-75">
+
+            <div style="align-items: center; display: flex">
+            <span><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">
+                    <button type="button" class="sort_button" >Best</button>
+
+                </a></span>
+                <span><a class="nav-link" href="{{ route('homepage.latest') }}" style="font-size: 20px">
+                    <button type="button" class="sort_button" >Latest</button>
+                </a></span>
+            </div>
+
             <div class="panel-body">
-                <table class="table table-hover">
+
+                <table class="table styled-table">
 
                     <thead>
-                    <th scope="col">File</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Owner</th>
-                    <th scope="col"></th>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">File</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col"></th>
+                    </tr>
+
                     </thead>
 
                     <tbody>
                     @foreach ($files as $file)
 
                         <tr>
-                            <td class="table-text" style="display: flex; align-items: center;">
-                                <a class="me-2" href="{{ route('file.download', [$file]) }}">
+                            <th scope="row">{{$files->firstItem() + $loop->index}}</th>
+                            <td class="table-text">
+                                <a class="me-2" href="{{ route('file.download', [$file]) }}" aria-label="link to download file">
                                     {{ $file->user_file_name . "." . $file->file_type }}
                                 </a>
 
                                 @if(auth()->user()->is_admin)
-                                    <form action="{{route('delete.file', [$file])}}" method="POST">
+                                    <form action="{{route('delete.file', [$file])}}" method="POST" style="display: inline;">
                                         @csrf
                                         {{ method_field('DELETE') }}
-                                        <button class="btn btn-default btn-sm"
+                                        <button class="btn btn-default btn-sm" aria-label="delete file"
                                                 onclick="return confirm('Are you sure you want to delete this file?')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -59,10 +76,11 @@
                                 @endif
 
                                 @if( $file->checkLike($file->likes->where('likeable_id', $file->id)->all()) )
-                                    <form action="{{ route('unlike.file', [$file])}}" method="POST">
+                                    <form class="form-inline" action="{{ route('unlike.file', [$file])}}" method="POST" style="display: inline;">
                                         @csrf
                                         <button class="btn btn-outline-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor"
                                                  class="bi bi-hand-thumbs-down" viewBox="0 0 16 16">
                                                 <path d="M8.864 15.674c-.956.24-1.843-.484-1.908-1.42-.072-1.05-.23-2.015-.428-2.59-.125-.36-.479-1.012-1.04-1.638-.557-.624-1.282-1.179-2.131-1.41C2.685
                                                  8.432 2 7.85 2 7V3c0-.845.682-1.464 1.448-1.546 1.07-.113 1.564-.415 2.068-.723l.048-.029c.272-.166.578-.349.97-.484C6.931.08
@@ -82,10 +100,11 @@
                                         </button>
                                     </form>
                                 @else
-                                    <form action="{{ route('like.file', [$file]) }}" method="POST">
+                                    <form class="form-inline" action="{{ route('like.file', [$file]) }}" method="POST" style="display: inline;">
                                         @csrf
                                         <button class="btn btn-outline-primary btn-sm">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                 fill="currentColor"
                                                  class="bi bi-hand-thumbs-up" viewBox="0 0 16 16">
                                                 <path d="M8.864.046C7.908-.193 7.02.53 6.956 1.466c-.072 1.051-.23
                                              2.016-.428 2.59-.125.36-.479 1.013-1.04 1.639-.557.623-1.282 1.178-2.131
@@ -112,7 +131,7 @@
 
                             </td>
 
-                            <td class="table-text">
+                            <td class="table-text" style="width: 25%;">
                                 <div>{{ $file->description }}</div>
                             </td>
 
@@ -121,15 +140,31 @@
                             </td>
 
                             <td class="table-text">
+                                <div>
+                                    @if($file->file_size > 1000000)
+                                        {{round($file->file_size / (1024.0*1024.0)) }} MB
+                                    @else
+                                        {{round($file->file_size / (1024.0)) }} kB
+                                    @endif
+                                </div>
+                            </td>
+
+                            <td class="table-text">
                                 <div>{{ $file->user->email }}</div>
                             </td>
 
-                            <td><a class="d-block text-center mt-2" href="{{route('file.details', [$file])}}"> More info </a></td>
+                            <td>
+                                <a class="d-block text-center mt-2" aria-label="link to file details"
+                                   href="{{route('file.details', [$file])}}"> More info </a>
+                            </td>
 
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
+            </div>
+            <div style="width: 200px; height: 200px; margin-left: auto; margin-right: auto;">
+                {{ $files->links() }}
             </div>
         </div>
     @else
