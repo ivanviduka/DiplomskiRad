@@ -10,7 +10,7 @@ class CommentController extends Controller
 {
     public function createComment(CreateCommentRequest $request)
     {
-        if(!File::find($request->file_id)->is_public){
+        if (!File::find($request->file_id)->is_public) {
             redirect()->back()->withErrors(['not_public' => 'Cannot submit comment']);
         }
 

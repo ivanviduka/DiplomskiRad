@@ -6,37 +6,47 @@
 
 @section('description')
     <meta name="description" content="Page with search Results">
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/table_style.css') }}"/>
 @endsection
 
 @section('content')
 
     @if (count($files) > 0)
-        <div class="panel panel-default">
+
+        <div class="container-fluid w-75">
+            <h2>Search Results</h2>
             <div class="panel-body">
-                <table class="table table-hover">
+
+                <table class="table styled-table">
 
                     <thead>
-                    <th scope="col">File</th>
-                    <th scope="col">Description</th>
-                    <th scope="col">Subject</th>
-                    <th scope="col">Owner</th>
-                    <th scope="col"></th>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">File</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Size</th>
+                        <th scope="col">Owner</th>
+                        <th scope="col"></th>
+                    </tr>
                     </thead>
 
                     <tbody>
                     @foreach ($files as $file)
 
                         <tr>
-                            <td class="table-text" style="display: flex; align-items: center;">
+                            <th scope="row">{{$files->firstItem() + $loop->index}}</th>
+                            <td class="table-text">
                                 <a class="me-2" href="{{ route('file.download', [$file]) }}">
                                     {{ $file->user_file_name . "." . $file->file_type }}
                                 </a>
 
                                 @if(auth()->user()->is_admin)
-                                    <form action="{{route('delete.file', [$file->file_id])}}" method="POST">
+                                    <form action="{{route('delete.file', [$file])}}" method="POST"
+                                          style="display: inline;">
                                         @csrf
                                         {{ method_field('DELETE') }}
-                                        <button class="btn btn-default btn-sm"
+                                        <button class="btn btn-default btn-sm" aria-label="delete file"
                                                 onclick="return confirm('Are you sure you want to delete this file?')">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                                  fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
@@ -56,7 +66,7 @@
 
                             </td>
 
-                            <td class="table-text">
+                            <td class="table-text" style="width: 25%;">
                                 <div>{{ $file->description }}</div>
                             </td>
 
@@ -65,20 +75,34 @@
                             </td>
 
                             <td class="table-text">
+                                <div>
+                                    @if($file->file_size > 1000000)
+                                        {{round($file->file_size / (1024.0*1024.0)) }} MB
+                                    @else
+                                        {{round($file->file_size / (1024.0)) }} kB
+                                    @endif
+                                </div>
+                            </td>
+
+                            <td class="table-text">
                                 <div>{{ $file->user->email }}</div>
                             </td>
 
-                            <td><a class="d-block text-center mt-2" href="{{route('file.details', [$file->file_id])}}"> More info </a></td>
+                            <td>
+                                <a class="d-block text-center mt-2" aria-label="link to file details"
+                                   href="{{route('file.details', [$file])}}"> More info </a>
+                            </td>
 
                         </tr>
                     @endforeach
                     </tbody>
                 </table>
             </div>
-            <div style="width: 200px; height: 200px;">
+            <div style="width: 200px; height: 200px; margin-left: auto; margin-right: auto;">
                 {{ $files->links() }}
             </div>
         </div>
+
     @else
         <div class="container">
             <div class="alert alert-dark d-flex align-items-center" role="alert">

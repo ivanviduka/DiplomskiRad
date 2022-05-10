@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     @yield('title')
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -10,53 +10,58 @@
 
 <body>
 
-<nav class="navbar navbar-light navbar-expand-lg mb-5" style="background-color: #e3f2fd;">
+<header class="p-3 bg-dark text-white mb-5">
     <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
 
-        <h2><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">FERIT Share</a></h2>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-                @guest
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}" style="font-size: 20px">Login</a>
+            @auth
+                <h2 class="me-4">
+                    <a href="{{ route('homepage') }}" style="font-size: 25px"
+                       class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">
+                        FERIT Share
+                    </a>
+                </h2>
+                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li>
+                        <a class="nav-link px-2 text-white" href="{{ route('user.files') }}">My files</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('register') }}" style="font-size: 20px">Register</a>
+                    <li>
+                        <a class="nav-link px-2 text-white" href="{{ route('search') }}">Search</a>
                     </li>
-                @endguest
-                @auth
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.files') }}">My files</a>
-                    </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('search') }}">Search</a>
-                        </li>
-                    <li class="nav-item">
-                            <a class="nav-link" href="{{ route('create-file.form') }}">Add new file</a>
+                    <li>
+                        <a class="nav-link px-2 text-white" href="{{ route('create-file.form') }}">Add new file</a>
                     </li>
                     @if(auth()->user()->is_admin)
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('admin') }}">Admin</a>
+                        <li>
+                            <a class="nav-link px-2 text-white" href="{{ route('admin') }}">Admin</a>
                         </li>
 
-                        <li class="nav-item">
-                            <a class="nav-link" href="{{ route('statistics') }}">Statistics</a>
+                        <li>
+                            <a class="nav-link px-2 text-white" href="{{ route('statistics') }}">Statistics</a>
                         </li>
                     @endif
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('signout') }}">Logout</a>
+                    <li>
+                        <a class="nav-link px-2 text-white" href="{{ route('signout') }}">Logout</a>
                     </li>
-                @endauth
-            </ul>
+                </ul>
+            @endauth
+
+            @guest
+                <div class="text-end">
+                    <a href="{{route('login')}}" style="font-size: 20px">
+                        <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    </a>
+
+                    <a href="{{route('register')}}" style="font-size: 20px">
+                        <button type="button" class="btn btn-warning">Register</button>
+                    </a>
+                </div>
+            @endguest
         </div>
     </div>
-</nav>
+</header>
 @yield('content')
 
 </body>
