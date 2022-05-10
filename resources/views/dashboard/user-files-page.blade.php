@@ -62,7 +62,9 @@
 
                             <td class="table-text">
                                 <div>
-                                    @if($file->file_size > 1000000)
+                                    @if($file->file_size < 1024)
+                                        {{$file->file_size}} B
+                                    @elseif($file->file_size > 1000000)
                                         {{round($file->file_size / (1024.0*1024.0)) }} MB
                                     @else
                                         {{round($file->file_size / (1024.0)) }} kB
@@ -74,7 +76,6 @@
                                 <form action="{{route('update-file.form', [$file])}}" method="GET">
                                     <button class="btn btn-outline-secondary">Alter File</button>
                                 </form>
-
 
                             </td>
 

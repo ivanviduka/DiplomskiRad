@@ -49,16 +49,15 @@
             @endauth
 
             @guest
-                    <div class="text-end">
-                        <a href="{{route('login')}}" style="font-size: 20px">
-                            <button type="button" class="btn btn-outline-light me-2">Login</button>
-                        </a>
+                <div class="text-end">
+                    <a href="{{route('login')}}" style="font-size: 20px">
+                        <button type="button" class="btn btn-outline-light me-2">Login</button>
+                    </a>
 
-                        <a href="{{route('register')}}" style="font-size: 20px">
-                            <button type="button" class="btn btn-warning">Register</button>
-                        </a>
-                    </div>
-
+                    <a href="{{route('register')}}" style="font-size: 20px">
+                        <button type="button" class="btn btn-warning">Register</button>
+                    </a>
+                </div>
             @endguest
         </div>
     </div>

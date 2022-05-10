@@ -10,9 +10,10 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-class FileAction {
-
-    public function saveFile(UploadFileRequest $request, string $storagePath){
+class FileAction
+{
+    public function saveFile(UploadFileRequest $request, string $storagePath)
+    {
 
         $file = $request->file('file');
         $generatedFileName = Str::uuid()->toString() . '.' . $file->extension();
@@ -26,7 +27,8 @@ class FileAction {
         ];
     }
 
-    public function getFileDetails(int $file_id){
+    public function getFileDetails(int $file_id)
+    {
         $details = File::with('user:id,first_name,last_name,email', 'subject:id,subject_name,major_name,year_of_study')
             ->where('id', $file_id)
             ->first();
@@ -42,14 +44,16 @@ class FileAction {
         return $details;
     }
 
-    public function deleteFile(File $file, string $storagePath){
+    public function deleteFile(File $file, string $storagePath)
+    {
 
         Storage::delete($storagePath . "/" . $file->generated_file_name);
         DB::table('likeable_likes')->where('likeable_id', $file->id)->delete();
         DB::table('likeable_like_counters')->where('likeable_id', $file->id)->delete();
     }
 
-    public function deleteUserFiles(User $user, string $storagePath){
+    public function deleteUserFiles(User $user, string $storagePath)
+    {
 
         $files = File::where("user_id", $user->id)->get();
         foreach ($files as $file) {

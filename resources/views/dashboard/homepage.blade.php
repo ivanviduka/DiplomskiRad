@@ -6,8 +6,8 @@
 
 @section('description')
     <meta name="description" content="Homepage with shared public files">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/table_style.css') }}" />
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/button_style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/table_style.css') }}"/>
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/button_style.css') }}"/>
 @endsection
 
 @section('content')
@@ -18,18 +18,17 @@
 
             <div style="align-items: center; display: flex">
             <span><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">
-                    <button type="button" class="sort_button" >Best</button>
+                    <button type="button" class="sort_button">Best</button>
 
                 </a></span>
                 <span><a class="nav-link" href="{{ route('homepage.latest') }}" style="font-size: 20px">
-                    <button type="button" class="sort_button" >Latest</button>
+                    <button type="button" class="sort_button">Latest</button>
                 </a></span>
             </div>
 
             <div class="panel-body">
 
                 <table class="table styled-table">
-
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -40,7 +39,6 @@
                         <th scope="col">Owner</th>
                         <th scope="col"></th>
                     </tr>
-
                     </thead>
 
                     <tbody>
@@ -49,12 +47,14 @@
                         <tr>
                             <th scope="row">{{$files->firstItem() + $loop->index}}</th>
                             <td class="table-text">
-                                <a class="me-2" href="{{ route('file.download', [$file]) }}" aria-label="link to download file">
+                                <a class="me-2" href="{{ route('file.download', [$file]) }}"
+                                   aria-label="link to download file">
                                     {{ $file->user_file_name . "." . $file->file_type }}
                                 </a>
 
                                 @if(auth()->user()->is_admin)
-                                    <form action="{{route('delete.file', [$file])}}" method="POST" style="display: inline;">
+                                    <form action="{{route('delete.file', [$file])}}" method="POST"
+                                          style="display: inline;">
                                         @csrf
                                         {{ method_field('DELETE') }}
                                         <button class="btn btn-default btn-sm" aria-label="delete file"
@@ -76,7 +76,8 @@
                                 @endif
 
                                 @if( $file->checkLike($file->likes->where('likeable_id', $file->id)->all()) )
-                                    <form class="form-inline" action="{{ route('unlike.file', [$file])}}" method="POST" style="display: inline;">
+                                    <form class="form-inline" action="{{ route('unlike.file', [$file])}}" method="POST"
+                                          style="display: inline;">
                                         @csrf
                                         <button class="btn btn-outline-primary btn-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -100,7 +101,8 @@
                                         </button>
                                     </form>
                                 @else
-                                    <form class="form-inline" action="{{ route('like.file', [$file]) }}" method="POST" style="display: inline;">
+                                    <form class="form-inline" action="{{ route('like.file', [$file]) }}" method="POST"
+                                          style="display: inline;">
                                         @csrf
                                         <button class="btn btn-outline-primary btn-sm">
                                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
@@ -141,11 +143,15 @@
 
                             <td class="table-text">
                                 <div>
-                                    @if($file->file_size > 1000000)
+
+                                    @if($file->file_size < 1024)
+                                        {{$file->file_size}} B
+                                    @elseif($file->file_size > 1000000)
                                         {{round($file->file_size / (1024.0*1024.0)) }} MB
                                     @else
                                         {{round($file->file_size / (1024.0)) }} kB
                                     @endif
+
                                 </div>
                             </td>
 

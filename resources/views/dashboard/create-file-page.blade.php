@@ -37,14 +37,15 @@
                             </div>
 
                             <div class="mb-3">
-                                <label for="fileDescription" class="form-label"><strong>Add file description</strong></label>
+                                <label for="fileDescription" class="form-label"><strong>Add file
+                                        description</strong></label>
                                 <textarea type="text" name="description" rows=3 cols=2 class="form-control"
                                           id="fileDescription">{{old('description')}}</textarea>
                             </div>
 
                             <div class="form-check mb-3">
                                 <input class="form-check-input" type="checkbox" {{old('is_public') ? "checked" : ""}}
-                                       name="is_public" id="public_check">
+                                name="is_public" id="public_check">
                                 <label class="form-check-label" for="public_check">
                                     Make file public
                                 </label>
@@ -64,7 +65,6 @@
                                     <span class="text-danger mt-2 mb-2">{{ $errors->first('subject_id') }}</span>
                                 @endif
                             </div>
-
 
                             <button type="submit" name="submit" class="btn btn-success btn-block mt-4">
                                 Upload File

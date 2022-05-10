@@ -15,6 +15,7 @@
                     <div class="card">
                         <h3 class="card-header text-center">Login</h3>
                         <div class="card-body">
+
                             <form method="POST" action="{{ route('login.custom') }}">
                                 @csrf
 

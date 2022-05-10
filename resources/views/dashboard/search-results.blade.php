@@ -29,7 +29,6 @@
                         <th scope="col">Owner</th>
                         <th scope="col"></th>
                     </tr>
-
                     </thead>
 
                     <tbody>
@@ -43,7 +42,8 @@
                                 </a>
 
                                 @if(auth()->user()->is_admin)
-                                    <form action="{{route('delete.file', [$file])}}" method="POST" style="display: inline;">
+                                    <form action="{{route('delete.file', [$file])}}" method="POST"
+                                          style="display: inline;">
                                         @csrf
                                         {{ method_field('DELETE') }}
                                         <button class="btn btn-default btn-sm" aria-label="delete file"

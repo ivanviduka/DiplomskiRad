@@ -6,9 +6,8 @@
 
 @section('description')
     <meta name="description" content="Display of all users">
-    <link rel="stylesheet" type="text/css" href="{{ asset('/css/table_style.css') }}" />
+    <link rel="stylesheet" type="text/css" href="{{ asset('/css/table_style.css') }}"/>
 @endsection
-
 
 @section('content')
     @if (count($users) > 0)
@@ -21,7 +20,6 @@
                             {{ $errors->first('role_id') }}
                         </div>
                     @endif
-
 
                     <div class="container table-responsive py-5">
                         <table class="table admin-table">

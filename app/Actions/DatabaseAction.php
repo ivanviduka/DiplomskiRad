@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\DB;
 
 class DatabaseAction
 {
-
     public function adminStatistics()
     {
         $statisticInfo = DB::select('SELECT COUNT(DISTINCT users.id) AS users, (SELECT COUNT(files.id) FROM files WHERE
@@ -19,7 +18,8 @@ class DatabaseAction
         return $statisticInfo[0];
     }
 
-    public function getSearchOptions(){
+    public function getSearchOptions()
+    {
         $options[0] = DB::select('SELECT id, subject_name FROM subjects');
         $options[1] = DB::select('SELECT DISTINCT year_of_study FROM subjects ORDER BY year_of_study');
         $options[2] = DB::select('SELECT DISTINCT major_name, major_id FROM subjects');
