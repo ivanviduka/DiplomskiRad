@@ -24,7 +24,7 @@ class UploadFileRequest extends FormRequest
     public function rules()
     {
         return [
-            'file' => 'required|max:100000|file|filled|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx,xml,html,zip',
+            'file' => 'required|max:10000|file|filled|mimes:png,jpg,jpeg,csv,txt,xlx,xls,pdf,doc,docx,xml,html,zip',
             'description' => 'nullable|max:1000',
             'subject_id' => 'required|not_in:0|exists:subjects,id',
         ];
