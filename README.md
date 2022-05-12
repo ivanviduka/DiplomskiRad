@@ -8,7 +8,7 @@ FERIT Share - aplikacija namijenjena pohranjivanju datoteka i dijeljenju datotek
 5. Pozvati naredbu php artisan key:generate
 6. Pozvati naredbu php artisan migrate
 7. Pozvati naredbu php artisan db:seed --class=CreateUsersSeeder
-8. Unutar phpMyAdmin importati tablicu s popisom kolegija unutar odabrane baze podataka
+8. Unutar phpMyAdmin importati tablicu s popisom kolegija unutar odabrane baze podataka. Tablica se nalazi na repozitoriju pod nazivom subject-table, potrebno je postaviti naziv baze podataka na liniji #5 na vrijednost DB_DATABASE iz .env datoteke
 9. Pristupiti aplikaciji s podacima: email - admin@etfos.hr, password -  B2bFERIT!
 
 Moguće se registirati i s vlastitim korisničkim podacima, ali oni neće imati ovlasti administratora.
