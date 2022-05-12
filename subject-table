@@ -1,0 +1,185 @@
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `test`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `subjects`
+--
+
+
+
+--
+-- Dumping data for table `subjects`
+--
+
+INSERT INTO `subjects` (`id`, `subject_name`, `major_id`, `major_name`, `year_of_study`, `created_at`, `updated_at`) VALUES
+(1, 'Linearna algebra', 0, 'Svi smjerovi', 1, NULL, NULL),
+(2, 'Matematika 1', 0, 'Svi smjerovi', 1, NULL, NULL),
+(11, 'Inženjerska grafika i dokumentiranje', 0, 'Svi smjerovi', 1, NULL, NULL),
+(12, 'Programiranje 1', 0, 'Svi smjerovi', 1, NULL, NULL),
+(13, 'Matematičke osnove računarstva', 1, 'Preddiplomski računarstvo', 1, NULL, NULL),
+(14, 'Osnove elektrotehnike', 1, 'Preddiplomski računarstvo', 1, NULL, NULL),
+(15, 'Osnove elektotehnike i elektronike', 1, 'Preddiplomski računarstvo', 1, NULL, NULL),
+(16, 'Fizika 1', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 1, NULL, NULL),
+(17, 'Osnove elektrotehnike 1', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 1, NULL, NULL),
+(18, 'Matematika 2', 0, 'Svi smjerovi', 1, NULL, NULL),
+(19, 'Programiranje 2', 0, 'Svi smjerovi', 1, NULL, NULL),
+(20, 'Digitalna elektronika', 0, 'Svi smjerovi', 1, NULL, NULL),
+(21, 'Fizika', 1, 'Preddiplomski računarstvo', 1, NULL, NULL),
+(22, 'Elektronika', 1, 'Preddiplomski računarstvo', 1, NULL, NULL),
+(23, 'Elektronika 1', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 1, NULL, NULL),
+(24, 'Fizika 2', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 1, NULL, NULL),
+(25, 'Osnove elektrotehnike 2', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 1, NULL, NULL),
+(26, 'Ekonomika poduzeća', 0, 'Svi smjerovi', 3, NULL, NULL),
+(27, 'Komunikacijske vještine', 0, 'Svi smjerovi', 3, NULL, NULL),
+(28, 'Algoritmi i strukture podataka', 1, 'Preddiplomski računarstvo', 2, NULL, NULL),
+(29, 'Operacijski sustavi', 1, 'Preddiplomski računarstvo', 2, NULL, NULL),
+(30, 'Objektno orijentirano programiranje', 0, 'Svi smjerovi', 2, NULL, NULL),
+(31, 'Baze podataka', 0, 'Svi smjerovi', 2, NULL, NULL),
+(32, 'Linearna algebra 2', 1, 'Preddiplomski računarstvo', 2, NULL, NULL),
+(33, 'Energetske pretvorbe', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(34, 'Matematika 3', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(35, 'Materijali u elektrotehnici', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(36, 'Osnove energetike i ekologije', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(37, 'Osnove mjerenja', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(38, 'Elektronika 2', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(39, 'Komunikacijske mreže', 0, 'Svi smjerovi', 2, NULL, NULL),
+(40, 'Vjerojatnost i statistika', 0, 'Svi smjerovi', 2, NULL, NULL),
+(41, 'Signali i sustavi', 0, 'Svi smjerovi', 2, NULL, NULL),
+(42, 'Engleski jezik 1', 0, 'Svi smjerovi', 2, NULL, NULL),
+(43, 'Teorija informacija ', 0, 'Svi smjerovi', 2, NULL, NULL),
+(44, 'RPPOON', 1, 'Preddiplomski računarstvo', 2, NULL, NULL),
+(45, 'Analiza električnih mreža', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(46, 'Osnove električnih strojeva', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 2, NULL, NULL),
+(47, 'Arhitektura računala', 0, 'Svi smjerovi', 3, NULL, NULL),
+(48, 'Engleski jezik 2', 0, 'Svi smjerovi', 3, NULL, NULL),
+(49, 'Programsko inženjerstvo', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(50, 'ORWIMA', 0, 'Svi smjerovi', 3, NULL, NULL),
+(51, 'Tehnologija razvoja računalnih sustava', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(52, 'Modeliranje i simulacija', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(53, 'Automati i formalni jezici', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(54, 'Komunikacijski sustavi', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(55, 'Osnove automatskog upravljanja', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(56, 'Osnove električnih pogona', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(57, 'Osnove elektroenergetskog sustava', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(58, 'Osnove energetske elektronike', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(59, 'Engleski jezik 3', 0, 'Svi smjerovi', 3, NULL, NULL),
+(60, 'Osnove strojnog učenja', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(61, 'Osnove analize podataka', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(62, 'Kibernetička sigurnost', 1, 'Preddiplomski računarstvo', 3, NULL, NULL),
+(63, 'Projektiranje tehničkih sustava', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(64, 'Električne instalacije i rasvjeta', 2, 'Preddiplomski elektrotehnika i informacijska tehnologija', 3, NULL, NULL),
+(65, 'Dizajn računalnih sustava', 0, 'Svi smjerovi', 4, NULL, NULL),
+(66, 'Linux u ugradbenim sustavima', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(67, 'Napredno programiranje', 0, 'Svi smjerovi', 4, NULL, NULL),
+(68, 'OKAPP', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(69, 'Programski sustavi i napajanja za vozila', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(70, 'APPUSKSU', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(71, 'Objektno programiranje', 0, 'Svi smjerovi', 4, NULL, NULL),
+(72, 'Primjenjena energetska elektronika', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(73, 'Računalne mreže i protokoli u automobilu', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(74, 'Ugradbeni računalni sustavi', 3, 'Automobilsko računarstvo i komunikacije', 4, NULL, NULL),
+(75, 'DOSIVZAV', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(76, 'MITIAPP', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(77, 'Sigurnost informacijskih sustava', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(78, 'SUUSAIUV', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(79, 'Digitalna videotehnika', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(80, 'Inteligentni transportni sustavi', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(81, 'Projektni menadžemnt', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(82, 'Radar i LIDAR u autonomnim vozilima', 3, 'Automobilsko računarstvo i komunikacije', 5, NULL, NULL),
+(94, 'Električni strojevi', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(95, 'Analiza EE sustava', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(96, 'Elektroenergetska postrojenja', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(97, 'Primijenjeni elektromagnetizam u elektroenergetici', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(98, 'Elektromagnetska mjerenja', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(99, 'Elektroenergetski vodovi i transformatori', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(100, 'Energetska učinkovitost', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(101, 'Elektromagnetska kompatibilnost', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(102, 'Ekonomika i tržište električne energije', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(103, 'Pogonski strojevi i toplinske primjene OIE', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(104, 'Industrijska informatika', 0, 'Svi smjerovi', 4, NULL, NULL),
+(115, 'Elektromagnetska polja i valovi', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(116, 'Mreže računala', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(117, 'Numerička matematika', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(118, 'Mikroelektronika', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(119, 'Digitalna obrada signala', 0, 'Svi smjerovi', 4, NULL, NULL),
+(120, 'Kodovi i kodiranje', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(121, 'Elektrane', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(122, 'Prijenos i distribucija el. energije', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(123, 'Električni pogoni', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(124, 'Stabilnost i prijelazni procesi u EES-u', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(125, 'PEIRIP', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(126, 'Sklopni aparati i visokonaponska tehnika', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(127, 'PEEUEIE', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(128, 'Kvaliteta i pouzdanost u EES', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(129, 'Obnovljivi izvori električne energije', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(130, 'Industrijska mjerenja', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(131, 'Multimedijski sustavi', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(132, 'Predajnici ', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(133, 'Internet programiranje', 0, 'Svi smjerovi', 4, NULL, NULL),
+(156, 'Radio-relejne i satelitske komunikacije', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(157, 'Sigurnost računalnih sustava', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(158, 'Antene', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(159, 'Razvoj mobilnih aplikacija', 0, 'Svi smjerovi', 4, NULL, NULL),
+(160, 'Optoelektrične komunikacije', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 4, NULL, NULL),
+(161, 'Zaštita u EE sustavu', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(162, 'Vođenje elektroenergetskog sustava', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(163, 'KZAEM', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(164, 'Integracija OIE i napredne mreže', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(165, 'Dinamika industrijskih sustava', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(176, 'Mobilne komunikacije', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(177, 'Prijemnici', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(178, 'Komunikacijski protokoli', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(179, 'Primjena mikroupravljačkih sustava', 4, 'Diplomski elektrotehnika i informacijska tehnologija', 5, NULL, NULL),
+(180, 'Internet objekata', 0, 'Svi smjerovi', 5, NULL, NULL),
+(181, 'Menadžment', 0, 'Svi smjerovi', 5, NULL, NULL),
+(182, 'Upravljanje projektima', 0, 'Svi smjerovi', 5, NULL, NULL),
+(183, 'Izborni predmeti', 0, 'Svi smjerovi', 5, NULL, NULL),
+(184, 'Stručna praksa', 0, 'Svi smjerovi', 5, NULL, NULL),
+(185, 'Upravljanje procesima', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(208, 'Osnove robotike', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(209, 'Sistemsko programiranje', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(210, 'Raspoznavanje uzoraka i strojno učenje', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(211, 'Modeliranje i dizajn programskih sustava', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(212, 'Obrada slike i računalni vid', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(213, 'Računalni sustavi stvarnog vremena', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(214, 'Inteligentni sustavi', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(215, 'Meko računarstvo', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(216, 'Vizualizacija podataka', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(217, 'RUAP', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(224, 'Razvoj računalnih igara', 5, 'Diplomski računarstvo', 4, NULL, NULL),
+(225, 'PDRS', 5, 'Diplomski računarstvo', 5, NULL, NULL),
+(226, 'Raspodijeljenj računalni sustavi', 5, 'Diplomski računarstvo', 5, NULL, NULL),
+(227, 'OKPS', 5, 'Diplomski računarstvo', 5, NULL, NULL),
+(228, 'Modeliranje temeljeno na podacima', 5, 'Diplomski računarstvo', 5, NULL, NULL);
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `subjects`
+--
+ALTER TABLE `subjects`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `subject_name` (`subject_name`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `subjects`
+--
+ALTER TABLE `subjects`
+  MODIFY `id` bigint UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=229;
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
