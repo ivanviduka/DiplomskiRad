@@ -1,7 +1,7 @@
 FERIT Share - aplikacija namijenjena pohranjivanju datoteka i dijeljenju datoteka među studentima FERIT-a.
 
 ## Instalacija aplikacije
-1. Unutar terminala pozvati naredbu git clone https://github.com/ivanviduka/DiplomskiRad.git unutar direktorija koji može raditi sa serverom (npr. /var/www/html)
+1. U terminala pozvati naredbu git clone https://github.com/ivanviduka/DiplomskiRad.git unutar direktorija koji može raditi sa serverom (npr. /var/www/html)
 2. Ući u kreirani direktorij i pozvati naredbu composer install unutar terminala
 3. Pozvati naredbu cp (ili copy) .env.example .env
 4. Unutar .env datoteke postaviti vrijednosti za DB_DATABASE, DB_USERNAME i DB_PASSWORD
