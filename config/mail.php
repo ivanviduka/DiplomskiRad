@@ -43,6 +43,18 @@ return [
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
             'auth_mode' => null,
+            'from' => [
+                'address' => 'viduka.ivan@gmail.com',
+                'name' => 'Naslov'
+            ],
+            'sendmail' => '/usr/sbin/sendmail -bs',
+            'pretend' => false,
+            'markdown' => [
+                'theme' => 'default',
+                'paths' => [
+                    resource_path('views/vendor/mail'),
+                ],
+            ],
         ],
 
         'ses' => [

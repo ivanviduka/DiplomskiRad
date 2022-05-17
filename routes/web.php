@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\FileController;
+use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
@@ -61,13 +62,20 @@ Route::middleware('auth')->group(function () {
 
 
 Route::middleware('guest')->group(function () {
-    // Login Routes
+    //Login Routes
     Route::get('login', [AuthController::class, 'index'])->name('login');
     Route::post('custom-login', [AuthController::class, 'customLogin'])->middleware("throttle:8,2")->name('login.custom');
 
     //Registration Routes
     Route::get('registration', [AuthController::class, 'registration'])->name('register');
     Route::post('custom-registration', [AuthController::class, 'customRegistration'])->name('register.custom');
+
+    //Forgot Password Routes
+    Route::get('forgot-password', [ForgotPasswordController::class, 'showForgotPasswordForm'])->name('forget.password.get');
+    Route::post('forgot-password', [ForgotPasswordController::class, 'submitForgotPassword'])->name('forget.password.post');
+    Route::get('reset-password/{token}', [ForgotPasswordController::class, 'showResetPasswordForm'])->name('reset.password.get');
+    Route::post('reset-password', [ForgotPasswordController::class, 'submitResetPasswordForm'])->name('reset.password.post');
+
 });
 
 

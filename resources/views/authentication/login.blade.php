@@ -43,6 +43,14 @@
 
                                 <div class="d-grid mx-auto">
                                     <button type="submit" class="btn btn-dark btn-block">Sign in</button>
+
+                                    <div class="form-group row mt-3">
+
+                                        <label>
+                                            <a href="{{ route('forget.password.get') }}">Forgot Password?</a>
+                                        </label>
+
+                                    </div>
                                 </div>
                             </form>
 
