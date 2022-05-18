@@ -14,17 +14,8 @@
 
     @if (count($files) > 0)
 
+
         <div class="container-fluid w-75">
-
-            <div style="align-items: center; display: flex">
-            <span><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">
-                    <button type="button" class="sort_button">Best</button>
-
-                </a></span>
-                <span><a class="nav-link" href="{{ route('homepage.latest') }}" style="font-size: 20px">
-                    <button type="button" class="sort_button">Latest</button>
-                </a></span>
-            </div>
 
             <div class="panel-body">
 
@@ -32,11 +23,23 @@
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">File</th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'name'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'name')) }}">File</a>
+                        </th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == '' ? "active-sort" : ""}}" href="{{ route('homepage') }}">Likes</a>
+                        </th>
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Owner</th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'new'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'new')) }}">Date</a>
+                        </th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'size'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'size')) }}">Size</a>
+                        </th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'owner'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'owner')) }}">Owner</a>
+                        </th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -74,6 +77,9 @@
                                         </button>
                                     </form>
                                 @endif
+                            </td>
+
+                            <td>
 
                                 @if( $file->checkLike($file->likes->where('likeable_id', $file->id)->all()) )
                                     <form class="form-inline" action="{{ route('unlike.file', [$file])}}" method="POST"
@@ -139,6 +145,12 @@
 
                             <td class="table-text">
                                 <div>{{ $file->subject->subject_name}}</div>
+                            </td>
+
+                            <td class="table-text">
+                                <div>
+                                    {{ isset($file->created_at)? \Carbon\Carbon::parse($file->created_at)->format('d.m.Y') : "" }}
+                                </div>
                             </td>
 
                             <td class="table-text">

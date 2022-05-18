@@ -8,36 +8,15 @@ use App\Http\Requests\UploadFileRequest;
 use App\Models\Comment;
 use App\Models\File;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 
 
 class FileController extends Controller
 {
-    public function index()
+    public function index(Request $request, FileAction $action)
     {
-        $files = File::with('user:id,email', 'subject:id,subject_name', 'likeCounter', 'likes')
-            ->leftJoin('likeable_like_counters', 'files.id', '=', 'likeable_like_counters.likeable_id')
-            ->select('files.*')
-            ->where('is_public', 1)
-            ->orderBy('likeable_like_counters.count', 'DESC')
-            ->orderBy('files.user_file_name', 'ASC');
-
-
         return view('dashboard.homepage', [
-            'files' => $files->paginate(10)
-        ]);
-    }
-
-    public function indexLatest()
-    {
-        $files = File::with('user:id,email', 'subject:id,subject_name', 'likeCounter', 'likes')
-            ->leftJoin('likeable_like_counters', 'files.id', '=', 'likeable_like_counters.likeable_id')
-            ->select('files.*')
-            ->where('is_public', 1)
-            ->orderBy('created_at', 'DESC')
-            ->orderBy('files.user_file_name', 'ASC');
-
-        return view('dashboard.homepage', [
-            'files' => $files->paginate(10)
+            'files' => $action->sortFilesForDisplay($request)
         ]);
     }
 
