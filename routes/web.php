@@ -24,7 +24,6 @@ Route::middleware('auth')->group(function () {
 
     //File Routes
     Route::get('/', [FileController::class, 'index'])->name('homepage');
-    Route::get('/latest', [FileController::class, 'indexLatest'])->name('homepage.latest');
     Route::post('/like-post/{file:generated_file_name}', [FileController::class, 'likeFile'])->name('like.file');
     Route::post('/unlike-post/{file:generated_file_name}', [FileController::class, 'unlikeFile'])->name('unlike.file');
     Route::get('my-files', [FileController::class, 'userFiles'])->name('user.files');
