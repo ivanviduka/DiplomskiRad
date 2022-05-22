@@ -17,6 +17,31 @@
 
         <div class="container-fluid w-75">
 
+            <div>
+                <div>
+                    <form action="{{ route('homepage')}}" class="float-end text-end mb-4"
+                          method="GET" role="search">
+
+                        <input type="hidden" name="sort" value="{{request()->query('sort')}}">
+
+                        <div class="input-group">
+
+                            <button class="btn btn-info" type="submit" title="Search projects">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                     class="bi bi-search ms-1" viewBox="0 0 16 16">
+                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1
+                                     1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12
+                                      6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+                                </svg>
+                            </button>
+                            <input type="text" class="form-control mr-2" name="file_name_search"
+                                   placeholder="Search files by name" id="file_name_search">
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+
             <div class="panel-body">
 
                 <table class="table styled-table">
@@ -24,21 +49,26 @@
                     <tr>
                         <th scope="col">#</th>
                         <th scope="col">
-                            <a class="{{request()->query('sort') == 'name'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'name')) }}">File</a>
+                            <a class="{{request()->query('sort') == 'name'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'name')) }}">File</a>
                         </th>
                         <th scope="col">
-                            <a class="{{request()->query('sort') == '' ? "active-sort" : ""}}" href="{{ route('homepage') }}">Likes</a>
+                            <a class="{{request()->query('sort') == '' ? "active-sort" : ""}}"
+                               href="{{ route('homepage') }}">Likes</a>
                         </th>
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
                         <th scope="col">
-                            <a class="{{request()->query('sort') == 'new'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'new')) }}">Date</a>
+                            <a class="{{request()->query('sort') == 'new'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'new')) }}">Date</a>
                         </th>
                         <th scope="col">
-                            <a class="{{request()->query('sort') == 'size'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'size')) }}">Size</a>
+                            <a class="{{request()->query('sort') == 'size'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'size')) }}">Size</a>
                         </th>
                         <th scope="col">
-                            <a class="{{request()->query('sort') == 'owner'? 'active-sort' : ''}}" href="{{ route('homepage', array('sort' => 'owner')) }}">Owner</a>
+                            <a class="{{request()->query('sort') == 'owner'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'owner')) }}">Owner</a>
                         </th>
                         <th scope="col"></th>
                     </tr>
