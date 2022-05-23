@@ -13,10 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Session;
 
-
 class FileAction
 {
-
 
     public function saveFile(UploadFileRequest $request, string $storagePath)
     {
@@ -35,6 +33,7 @@ class FileAction
 
     public function sortFilesForDisplay(Request $request)
     {
+
         $sortDirection = session()->get('sortDirection', true);
         $previousPage = session()->get('previousPage', 1);
 
@@ -72,9 +71,10 @@ class FileAction
 
         $results = $files->paginate(10)->appends(request()->query());
 
-        session()->put('previousPage', $results->currentPage());
+       session()->put('previousPage', $results->currentPage());
 
-        return $results;
+       return $results;
+
 
 
     }
