@@ -14,37 +14,15 @@
 
     @if (count($files) > 0)
 
-
         <div class="container-fluid w-75">
 
             <div>
-                <div>
-                    <form action="{{ route('homepage')}}" class="float-end text-end mb-4"
-                          method="GET" role="search">
-
-                        <input type="hidden" name="sort" value="{{request()->query('sort')}}">
-
-                        <div class="input-group">
-
-                            <button class="btn btn-info" type="submit" title="Search projects">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                     class="bi bi-search ms-1" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1
-                                     1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12
-                                      6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
-                                </svg>
-                            </button>
-                            <input type="text" class="form-control mr-2" name="file_name_search"
-                                   placeholder="Search files by name" id="file_name_search">
-                        </div>
-                    </form>
-                </div>
+                <input type="text" class="float-end mb-4" id="searchByName" onkeyup="myFunction()" placeholder="Search by filename...">
             </div>
-
 
             <div class="panel-body">
 
-                <table class="table styled-table">
+                <table id="filesTable" class="table styled-table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
@@ -233,6 +211,31 @@
         </div>
     @endif
 @endsection
+
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchByName");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("filesTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 
 
