@@ -52,6 +52,13 @@
     border-bottom: 2px solid #252525;
 }
 
+#searchByName {
+    width: 30%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 2px solid #797979;
+}
+
 
 
 

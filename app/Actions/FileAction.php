@@ -13,11 +13,8 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Session;
 
-
-
 class FileAction
 {
-
 
     public function saveFile(UploadFileRequest $request, string $storagePath)
     {
@@ -44,7 +41,7 @@ class FileAction
             $request->page = 1;
         }
 
-        if ($previousPage == (int)$request->page && !isset($request->file_name_search)) {
+        if ($previousPage == (int)$request->page) {
             $sortDirection = !$sortDirection;
             session()->put('sortDirection', $sortDirection);
         }
@@ -74,13 +71,11 @@ class FileAction
 
         $results = $files->paginate(10)->appends(request()->query());
 
-        session()->put('previousPage', $results->currentPage());
+       session()->put('previousPage', $results->currentPage());
 
-        if(isset($request->file_name_search)) {
-            return $files->where('user_file_name', 'LIKE', '%'.$request->file_name_search.'%')->paginate(10)->appends(request()->query());
-        } else {
-            return $results;
-        }
+       return $results;
+
+
 
     }
 
