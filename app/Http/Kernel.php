@@ -2,6 +2,8 @@
 
 namespace App\Http;
 
+
+use App\Http\Middleware\CanDownloadPrivateFile;
 use App\Http\Middleware\CheckAdmin;
 use App\Http\Middleware\CheckAdminOrOwner;
 use App\Http\Middleware\CheckOwner;
@@ -71,5 +73,6 @@ class Kernel extends HttpKernel
         'admin' => CheckAdmin::class,
         'admin-owner' => CheckAdminOrOwner::class,
         'owner-public' => CheckOwnerOrPublic::class,
+        'can-download-private' => CanDownloadPrivateFile::class
     ];
 }

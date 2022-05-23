@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EmailRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use App\Models\User;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
@@ -21,11 +21,8 @@ class ForgotPasswordController extends Controller
     }
 
 
-    public function submitForgotPassword(Request $request)
+    public function submitForgotPassword(EmailRequest $request)
     {
-        $request->validate([
-            'email' => 'required|email|exists:users',
-        ]);
 
         $token = Str::random(64);
 
