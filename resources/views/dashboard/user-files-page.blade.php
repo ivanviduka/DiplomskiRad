@@ -13,6 +13,14 @@
 
     @if (count($files) > 0)
         <div class="container-fluid w-75">
+
+            @if (Session::has('message'))
+
+                <div class="alert alert-success" role="alert">
+                    {{ Session::get('message') }}
+                </div>
+
+            @endif
             <h2>My files</h2>
             <div class="panel-body">
                 <table class="table styled-table">
@@ -24,6 +32,7 @@
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
                         <th scope="col">Size</th>
+                        <th scope="col"></th>
                         <th scope="col"></th>
                         <th scope="col"></th>
                     </tr>
@@ -73,10 +82,18 @@
                             </td>
 
                             <td>
+                                @if(!$file->is_public)
+
+                                    <form action="{{route('private.file.share.get', [$file])}}" method="GET">
+                                        <button class="btn btn-outline-secondary">Selected File Share</button>
+                                    </form>
+                                @endif
+                            </td>
+
+                            <td>
                                 <form action="{{route('update-file.form', [$file])}}" method="GET">
                                     <button class="btn btn-outline-secondary">Alter File</button>
                                 </form>
-
                             </td>
 
                             <td>
