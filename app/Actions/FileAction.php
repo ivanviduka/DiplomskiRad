@@ -71,9 +71,9 @@ class FileAction
 
         $results = $files->paginate(10)->appends(request()->query());
 
-       session()->put('previousPage', $results->currentPage());
+        session()->put('previousPage', $results->currentPage());
 
-       return $results;
+        return $results;
 
     }
 

@@ -58,7 +58,6 @@ class AuthController extends Controller
         return redirect()->route('admin');
     }
 
-
     public function signOut()
     {
         Session::flush();

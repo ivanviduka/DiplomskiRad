@@ -14,12 +14,10 @@ use Illuminate\Support\Str;
 
 class ForgotPasswordController extends Controller
 {
-    //
     public function showForgotPasswordForm()
     {
         return view('authentication.forgot-password');
     }
-
 
     public function submitForgotPassword(EmailRequest $request)
     {
@@ -32,7 +30,7 @@ class ForgotPasswordController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        Mail::send('email.password-reset-email', ['token' => $token], function($message) use($request){
+        Mail::send('email.password-reset-email', ['token' => $token], function ($message) use ($request) {
             $message->to($request->email);
             $message->subject('Reset Password');
         });
@@ -41,15 +39,13 @@ class ForgotPasswordController extends Controller
 
     }
 
-    public function showResetPasswordForm($token) {
-
+    public function showResetPasswordForm($token)
+    {
         return view('authentication.new-password-reset', ['token' => $token]);
-
     }
 
     public function submitResetPasswordForm(ResetPasswordRequest $request)
     {
-
         $updatePassword = DB::table('password_resets')->where(
             [
                 'email' => $request->email,
@@ -57,16 +53,15 @@ class ForgotPasswordController extends Controller
             ])
             ->first();
 
-        if(!$updatePassword){
+        if (!$updatePassword) {
             return back()->with('message', 'Invalid token!');
         }
-
 
         User::where('email', $request->email)->update([
             'password' => Hash::make($request->password)
         ]);
 
-        DB::table('password_resets')->where(['email'=> $request->email])->delete();
+        DB::table('password_resets')->where(['email' => $request->email])->delete();
 
         return redirect('/login')->with('message', 'Your password has been changed!');
 
