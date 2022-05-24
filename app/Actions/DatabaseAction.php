@@ -67,4 +67,9 @@ class DatabaseAction
         return $query;
     }
 
+    public function fileNotSharedWithThisUser(File $file, Request $request)
+    {
+        return DB::table('share_private_files')->where('generated_file_name', $file->generated_file_name)->where('receiver_email', $request->email)->doesntExist();
+    }
+
 }

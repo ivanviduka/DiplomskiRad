@@ -1,4 +1,4 @@
-.styled-table, .admin-table{
+.styled-table, .admin-table {
     border-collapse: collapse;
     margin: 25px 0;
     font-size: 0.9em;
@@ -29,8 +29,20 @@
     border-bottom: 2px solid #009879;
 }
 
+.styled-table thead tr th a {
+    text-decoration: none;
+    color: #ffffff;
+    text-align: left;
+}
 
-.admin-table thead tr{
+.active-sort {
+    font-weight: bold;
+    font-size: 17px;
+    font-style: italic;
+
+}
+
+.admin-table thead tr {
     background-color: #4d4d4d;
     color: #ffffff;
     text-align: left;
@@ -38,6 +50,13 @@
 
 .admin-table tbody tr:last-of-type {
     border-bottom: 2px solid #252525;
+}
+
+#searchByName {
+    width: 30%;
+    font-size: 16px;
+    padding: 12px 20px 12px 40px;
+    border: 2px solid #797979;
 }
 
 

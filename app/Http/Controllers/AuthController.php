@@ -23,6 +23,7 @@ class AuthController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
+            session()->put('sortDirection', false);
             return redirect("/");
         }
 
@@ -56,7 +57,6 @@ class AuthController extends Controller
 
         return redirect()->route('admin');
     }
-
 
     public function signOut()
     {

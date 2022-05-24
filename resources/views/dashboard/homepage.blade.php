@@ -16,27 +16,38 @@
 
         <div class="container-fluid w-75">
 
-            <div style="align-items: center; display: flex">
-            <span><a class="nav-link" href="{{ route('homepage') }}" style="font-size: 20px">
-                    <button type="button" class="sort_button">Best</button>
-
-                </a></span>
-                <span><a class="nav-link" href="{{ route('homepage.latest') }}" style="font-size: 20px">
-                    <button type="button" class="sort_button">Latest</button>
-                </a></span>
+            <div>
+                <input type="text" class="float-end mb-4" id="searchByName" onkeyup="myFunction()" placeholder="Search by filename...">
             </div>
 
             <div class="panel-body">
 
-                <table class="table styled-table">
+                <table id="filesTable" class="table styled-table">
                     <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">File</th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'name'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'name')) }}">File</a>
+                        </th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == '' ? "active-sort" : ""}}"
+                               href="{{ route('homepage') }}">Likes</a>
+                        </th>
                         <th scope="col">Description</th>
                         <th scope="col">Subject</th>
-                        <th scope="col">Size</th>
-                        <th scope="col">Owner</th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'new'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'new')) }}">Date</a>
+                        </th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'size'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'size')) }}">Size</a>
+                        </th>
+                        <th scope="col">
+                            <a class="{{request()->query('sort') == 'owner'? 'active-sort' : ''}}"
+                               href="{{ route('homepage', array('sort' => 'owner')) }}">Owner</a>
+                        </th>
                         <th scope="col"></th>
                     </tr>
                     </thead>
@@ -74,6 +85,9 @@
                                         </button>
                                     </form>
                                 @endif
+                            </td>
+
+                            <td>
 
                                 @if( $file->checkLike($file->likes->where('likeable_id', $file->id)->all()) )
                                     <form class="form-inline" action="{{ route('unlike.file', [$file])}}" method="POST"
@@ -143,6 +157,12 @@
 
                             <td class="table-text">
                                 <div>
+                                    {{ isset($file->created_at)? \Carbon\Carbon::parse($file->created_at)->format('d.m.Y') : "" }}
+                                </div>
+                            </td>
+
+                            <td class="table-text">
+                                <div>
 
                                     @if($file->file_size < 1024)
                                         {{$file->file_size}} B
@@ -191,6 +211,31 @@
         </div>
     @endif
 @endsection
+
+
+<script>
+    function myFunction() {
+        // Declare variables
+        var input, filter, table, tr, td, i, txtValue;
+        input = document.getElementById("searchByName");
+        filter = input.value.toUpperCase();
+        table = document.getElementById("filesTable");
+        tr = table.getElementsByTagName("tr");
+
+        // Loop through all table rows, and hide those who don't match the search query
+        for (i = 0; i < tr.length; i++) {
+            td = tr[i].getElementsByTagName("td")[0];
+            if (td) {
+                txtValue = td.textContent || td.innerText;
+                if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                    tr[i].style.display = "";
+                } else {
+                    tr[i].style.display = "none";
+                }
+            }
+        }
+    }
+</script>
 
 
 

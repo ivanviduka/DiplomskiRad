@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 
-class CheckAdmin
+class CanDownloadPrivateFile
 {
     /**
      * Handle an incoming request.
@@ -16,8 +16,10 @@ class CheckAdmin
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->is_admin) {
-            abort(403, 'Forbidden access');
+        $receiver_email = $request->route()->parameters()['receiver_email'];
+
+        if ($receiver_email != auth()->user()->email) {
+            abort(403, 'Forbidden Access');
         }
 
         return $next($request);
